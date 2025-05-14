@@ -23,7 +23,7 @@ public class ResultPanel extends JPanel {
         exportButton.setPreferredSize(new Dimension(30, 30));
         exportButton.setToolTipText("Eksportuj do pliku");
         exportButton.addActionListener(e -> {
-            Export.exportTableToExcel(table, System.getProperty("user.home") + "\\Downloads\\Zestawienie Korpusy.xlsx");
+            Export.exportTableToExcel(table, "Zestawienie Korpusy.xlsx");
         });
         exportButton.setAlignmentX(RIGHT_ALIGNMENT);
         exportButton.setMaximumSize(new Dimension(30, 30));
