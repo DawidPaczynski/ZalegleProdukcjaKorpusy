@@ -59,7 +59,7 @@ public class ResultTableModel extends AbstractTableModel {
         } else {
             // Last row (sum row)
             if (columnIndex == 0) {
-                return "Sum";
+                return "Suma";
             }
             String block = columnNames[columnIndex];
             float totalSum = 0f;

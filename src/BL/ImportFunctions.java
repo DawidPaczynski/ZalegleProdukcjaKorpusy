@@ -63,6 +63,7 @@ public class ImportFunctions {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        workplaceGroups.sort(Comparator.comparing(WorkplaceGroup::getName));
         return workplaceGroups;
     }
 

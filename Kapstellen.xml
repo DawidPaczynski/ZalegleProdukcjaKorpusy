@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Workplaces>
-    <Workplace Group="Cokoły" Id="32103" Name="Sockel und Füsse schweissen"/>
-    <Workplace Group="Certos/Akku/Sport" Id="32106" Name="Akkuladeschrank"/>
-    <Workplace Group="BHP/Skrzydła/żaluzje" Id="32107" Name="Thekenschrank"/>
-    <Workplace Group="BHP/Skrzydła/żaluzje" Id="32301" Name="Gehäuse schweissen (Rolladen)"/>
-    <Workplace Group="Offeny" Id="32501" Name="Gehäuse Serie 8070... Legnica"/>
-    <Workplace Group="Daszki/Accuardo/Assisto szuflada" Id="32601" Name="Gehäuse schweissen (Hängereg.)"/>
-    <Workplace Group="BHP/Skrzydła/żaluzje" Id="32801" Name="Gehäuse schweissen (Spinde)"/>
-    <Workplace Group="BHP/Skrzydła/żaluzje" Id="32901" Name="Cambio schweißen"/>
-    <Workplace Group="BHP/Skrzydła/żaluzje" Id="32902" Name="Intro/Resisto schweißen"/>
-
-
-
-
+    <Workplace Group="9. Cokoły" Id="32103" Name="Sockel und Füsse schweissen"/>
+    <Workplace Group="1. Certos/Akku/Sport" Id="32106" Name="Akkuladeschrank"/>
+    <Workplace Group="3. 89..." Id="32107" Name="Thekenschrank"/>
+    <Workplace Group="2. Skrzydła/żaluzje" Id="32301" Name="Gehäuse schweissen (Rolladen)"/>
+    <Workplace Group="4. Offeny" Id="32501" Name="Gehäuse Serie 8070... Legnica"/>
+    <Workplace Group="5. Accuardo/Assisto/SD" Id="32601" Name="Gehäuse schweissen (Hängereg.)"/>
+    <Workplace Group="6. BHP" Id="32801" Name="Gehäuse schweissen (Spinde)"/>
+    <Workplace Group="7. Cambio" Id="32901" Name="Cambio schweißen"/>
+    <Workplace Group="8. Resisto/Intro" Id="32902" Name="Intro/Resisto schweißen"/>
+    <Workplace Group="5. Accuardo/Assisto/SD" Id="32401" Name="Gehäuse Rollcontainer + SD-Aufsätze"/>
 </Workplaces>

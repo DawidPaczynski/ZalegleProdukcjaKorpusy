@@ -31,7 +31,7 @@ public class ResultTableCellRender extends DefaultTableCellRenderer {
                     cabinetCount += workplaceGroup.getWorkplaces().get(i).getProductionOrders().get(block).size();
                 }
             }
-            c.setToolTipText("Liczba: " + cabinetCount);
+            c.setToolTipText("Ilość: " + cabinetCount);
         }
         return c;
     }

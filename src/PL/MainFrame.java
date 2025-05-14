@@ -33,7 +33,7 @@ public class MainFrame extends JFrame {
             try {
                 mainPanel.add(new ResultPanel(), BorderLayout.CENTER);
             } catch (SQLException ex) {
-                throw new RuntimeException(ex);
+                JOptionPane.showMessageDialog(this, "Błąd podczas pobierania danych: " + ex.getMessage(), "Błąd", JOptionPane.ERROR_MESSAGE);
             }
             mainPanel.revalidate();
             mainPanel.repaint();
