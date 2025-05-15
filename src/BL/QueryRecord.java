@@ -11,8 +11,10 @@ public class QueryRecord {
     private final LocalDateTime productionDate;
     private final String orderNumber;
     private final int orderPos;
+    private final String color;
 
-    public QueryRecord(int workplaceID, String block, String itemNumber, String itemName, float productionTime, LocalDateTime productionDate, String orderNumber, int orderPos) {
+    public QueryRecord(int workplaceID, String block, String itemNumber, String itemName, float productionTime,
+                       LocalDateTime productionDate, String orderNumber, int orderPos, String color) {
         this.workplaceID = workplaceID;
         this.block = block;
         this.itemNumber = itemNumber;
@@ -21,6 +23,7 @@ public class QueryRecord {
         this.productionDate = productionDate;
         this.orderNumber = orderNumber;
         this.orderPos = orderPos;
+        this.color = color;
     }
 
     public int getWorkplaceID() {
@@ -53,5 +56,9 @@ public class QueryRecord {
 
     public int getOrderPos() {
         return orderPos;
+    }
+
+    public String getColor() {
+        return color;
     }
 }

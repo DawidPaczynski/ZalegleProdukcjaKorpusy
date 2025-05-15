@@ -8,14 +8,13 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class DetailsTableModel extends AbstractTableModel {
 
     private final List<DetailsTableProductionOrder> productionOrders;
-    private final String[] columnNames = {"Numer", "Nazwa", "Ilość" };
-    private final Class<?>[] columnClasses = {String.class, String.class, Integer.class};
+    private final String[] columnNames = {"Numer", "Nazwa", "Kolor","Ilość" };
+    private final Class<?>[] columnClasses = {String.class, String.class, String.class, Integer.class};
 
     public DetailsTableModel(WorkplaceGroup workplaceGroup, String block) {
         List<QueryRecord> queryRecords=new ArrayList<>();
@@ -38,7 +37,7 @@ public class DetailsTableModel extends AbstractTableModel {
                 productionOrders.add(productionOrder);
             }
         }
-        productionOrders.sort(Comparator.comparing(DetailsTableProductionOrder::getItemNumber));
+        productionOrders.sort(Comparator.comparing(DetailsTableProductionOrder::getColor).thenComparing(DetailsTableProductionOrder::getItemNumber));
     }
     @Override
     public int getRowCount() {
@@ -69,6 +68,8 @@ public class DetailsTableModel extends AbstractTableModel {
             case 1:
                 return productionOrder.getItemName();
             case 2:
+                return productionOrder.getColor();
+            case 3:
                 return productionOrder.getQuantity();
             default:
                 return null;

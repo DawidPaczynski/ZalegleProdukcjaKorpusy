@@ -7,7 +7,8 @@ public class DetailsTableProductionOrder extends QueryRecord {
     private int quantity;
 
     public DetailsTableProductionOrder(QueryRecord queryRecord) {
-        super(queryRecord.getWorkplaceID(), queryRecord.getBlock(), queryRecord.getItemNumber(), queryRecord.getItemName(), queryRecord.getProductionTime(), queryRecord.getProductionDate(), queryRecord.getOrderNumber(), queryRecord.getOrderPos());
+        super(queryRecord.getWorkplaceID(), queryRecord.getBlock(), queryRecord.getItemNumber(), queryRecord.getItemName(), queryRecord.getProductionTime(),
+                queryRecord.getProductionDate(), queryRecord.getOrderNumber(), queryRecord.getOrderPos(), queryRecord.getColor());
         this.quantity = 1;
     }
     public int getQuantity() {
@@ -20,13 +21,13 @@ public class DetailsTableProductionOrder extends QueryRecord {
     @Override
     public boolean equals(Object obj) {
         DetailsTableProductionOrder that = (DetailsTableProductionOrder) obj;
-        return getItemNumber().equals(that.getItemNumber());
+        return getItemNumber().equals(that.getItemNumber()) && getColor().equals(that.getColor());
     }
 
     @Override
     public int hashCode() {
         int result = getItemNumber().hashCode();
-        result = 31 * result + getItemName().hashCode();
+        result = 31 * result + getItemName().hashCode()+ getColor().hashCode();
         return result;
     }
 }

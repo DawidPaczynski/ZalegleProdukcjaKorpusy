@@ -10,7 +10,7 @@ public class DetailsDialog extends JDialog {
 
     public DetailsDialog(JFrame parent, WorkplaceGroup workplaceGroup, String block) {
         super(parent, "Szczegóły grupy", true);
-        this.setSize(500, 400);
+        this.setSize(550, 400);
         this.setLocationRelativeTo(parent);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLayout(new BorderLayout());
@@ -21,6 +21,7 @@ public class DetailsDialog extends JDialog {
         table.getColumnModel().getColumn(0).setPreferredWidth(180);
         table.getColumnModel().getColumn(1).setPreferredWidth(270);
         table.getColumnModel().getColumn(2).setPreferredWidth(50);
+        table.getColumnModel().getColumn(3).setPreferredWidth(50);
         scrollPane.setViewportView(table);
 
         this.add(scrollPane, BorderLayout.CENTER);
