@@ -9,6 +9,7 @@ public class Workplace {
     private String name;
     private TreeMap<String, List<QueryRecord>> productionOrders;
     private TreeMap<String,Float> productionTimes;
+    private boolean sumRelevant;
 
     public Workplace(int id) {
         this.id = id;
@@ -47,5 +48,11 @@ public class Workplace {
 
     public TreeMap<String, Float> getProductionTimes() {
         return productionTimes;
+    }
+    public boolean isSumRelevant() {
+        return sumRelevant;
+    }
+    public void setSumRelevant(boolean sumRelevant) {
+        this.sumRelevant = sumRelevant;
     }
 }

@@ -64,7 +64,7 @@ public class WorkplaceGroupsPanel extends JPanel implements ActionListener {
         if (source.equals(addButton)) {
             // Handle add button action
             GroupsTableModel tableModel = (GroupsTableModel) table.getModel();
-            tableModel.addNewWorkplace(0, "", "");
+            tableModel.addNewWorkplace(0, "", "", false);
             table.repaint();
             table.revalidate();
         } else if (source.equals(removeButton)) {

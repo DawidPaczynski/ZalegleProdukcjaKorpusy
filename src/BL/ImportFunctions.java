@@ -30,9 +30,22 @@ public class ImportFunctions {
         TreeMap<Integer,Workplace> workplaces=importDatabaseRecords();
         try {
             List<WorkplaceXMLRecord> workplaceXMLRecords = importWorkplacesXMLFromFile(WORKPLACE_FILE_PATH);
+            // Initialize workplace names and groups from XML records
+            for (WorkplaceXMLRecord record : workplaceXMLRecords) {
+                String groupName = record.getGroupName();
+                if (workplaceGroups.stream().noneMatch(group -> group.getName().equals(groupName))) {
+                    workplaceGroups.add(new WorkplaceGroup(groupName, new ArrayList<>()));
+                }
+            }
+
             for (Map.Entry<Integer,Workplace> entry : workplaces.entrySet()){
                 int workplaceId=entry.getKey();
                 Workplace workplace = entry.getValue();
+                workplace.setSumRelevant(workplaceXMLRecords.stream()
+                        .filter(record -> record.getId() == workplaceId)
+                        .map(WorkplaceXMLRecord::isSumRelevant)
+                        .findFirst()
+                        .orElse(false));
 
                 workplace.setName(workplaceXMLRecords.stream()
                         .filter(record -> record.getId() == workplaceId)
@@ -44,19 +57,16 @@ public class ImportFunctions {
                         .filter(record -> record.getId() == workplaceId)
                         .map(WorkplaceXMLRecord::getGroupName)
                         .findFirst()
-                        .orElse("Nieprzypisane");
-
-                WorkplaceGroup workplaceGroup=new WorkplaceGroup(groupName, new ArrayList<>());
-                if(workplaceGroups.stream().noneMatch(group -> group.getName().equals(groupName))) {
+                        .orElse("0. Nieprzypisane");
+                if(groupName.equals("0. Nieprzypisane") && workplaceGroups.stream().noneMatch(group -> group.getName().equals("0. Nieprzypisane"))) {
+                    WorkplaceGroup workplaceGroup = new WorkplaceGroup("0. Nieprzypisane", new ArrayList<>());
                     workplaceGroups.add(workplaceGroup);
                 }
-                else
-                {
-                    workplaceGroup=workplaceGroups.stream()
+                WorkplaceGroup workplaceGroup=workplaceGroups.stream()
                             .filter(group -> group.getName().equals(groupName))
                             .findFirst()
                             .orElse(null);
-                }
+
                 workplaceGroup.getWorkplaces().add(workplace);
 
             }
@@ -101,7 +111,8 @@ public class ImportFunctions {
                     int id = Integer.parseInt(element.getAttribute("Id"));
                     String name = element.getAttribute("Name");
                     String group = element.getAttribute("Group");
-                    WorkplaceXMLRecord workplaceXMLRecord = new WorkplaceXMLRecord(id, name, group);
+                    boolean sumRelevant = Boolean.parseBoolean(element.getAttribute("SumRelevant"));
+                    WorkplaceXMLRecord workplaceXMLRecord = new WorkplaceXMLRecord(id, name, group, sumRelevant);
                     workplaceXMLRecords.add(workplaceXMLRecord);
                 }
             }
@@ -111,7 +122,7 @@ public class ImportFunctions {
         return workplaceXMLRecords;
     }
 
-    public static void addWorkplaceToFile(String filePath, int id, String name, String group) {
+    public static void addWorkplaceToFile(String filePath, int id, String name, String group, boolean sumRelevant) {
         try {
             // Load the XML file
             File xmlFile = new File(filePath);
@@ -124,6 +135,7 @@ public class ImportFunctions {
             newWorkplace.setAttribute("Id", String.valueOf(id));
             newWorkplace.setAttribute("Name", name);
             newWorkplace.setAttribute("Group", group);
+            newWorkplace.setAttribute("SumRelevant", String.valueOf(sumRelevant));
 
             // Append the new element to the root
             document.getDocumentElement().appendChild(newWorkplace);
@@ -136,7 +148,7 @@ public class ImportFunctions {
         }
     }
 
-    public static void updateWorkplaceInFile(String filePath,int oldId,  int newId, String newName, String newGroup) {
+    public static void updateWorkplaceInFile(String filePath,int oldId,  int newId, String newName, String newGroup, boolean sumRelevant) {
         try {
             // Load the XML file
             File xmlFile = new File(filePath);
@@ -156,6 +168,7 @@ public class ImportFunctions {
                         element.setAttribute("Id", String.valueOf(newId));
                         element.setAttribute("Name", newName);
                         element.setAttribute("Group", newGroup);
+                        element.setAttribute("SumRelevant", String.valueOf(sumRelevant));
                         break;
                     }
                 }

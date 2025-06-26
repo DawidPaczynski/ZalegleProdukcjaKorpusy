@@ -21,7 +21,7 @@ public class DatabaseQueries {
                 "LEFT JOIN artikel ART ON S.artikelnr = ART.artikel\n" +
                 "LEFT JOIN fls_auftrag A ON S.id = A.id\n"+
                 "LEFT JOIN fls_arbeitsplan AP ON S.id = AP.id    AND S.fertauftragsnr = AP.fertauftragsnr AND S.fertauftragspos = AP.fertauftragspos AND S.artikelnr = AP.artikelnr AND s.KzTeil = AP.KzTeil AND s.Zattribut01 = AP.zattribut1 AND S.arbeitsgangnr = AP.arbeitsgangnr\n" +
-                "WHERE S.ZAttribut04 IN(32301,32601,32801,32401,32103,32501,32804,32105,32901,32902,32106,32107,32304,32305)\n" +
+                "WHERE S.ZAttribut04 IN(32301,32601,32801,32401,32103,32501,32804,32105,32901,32902,32106,32107,32304,32305,32101,32102)\n" +
                 "AND ST.TATTRIBUT7 <>'' AND AP.FERTIGTERMINDATUM>DATEADD(MONTH,-6,GETDATE()) AND S.Status<40;";
         Connection conn = DatabaseConnection.setConnection();
         PreparedStatement stmt = conn.prepareStatement(sql);

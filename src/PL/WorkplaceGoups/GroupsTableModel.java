@@ -8,8 +8,8 @@ import java.util.List;
 public class GroupsTableModel extends AbstractTableModel {
     private final List<WorkplaceXMLRecord> workplaces;
 
-    private final String[] columnNames = {"Kapstelle", "Nazwa", "Grupa"};
-    private final Class<?>[] columnClasses = {Integer.class, String.class, String.class};
+    private final String[] columnNames = {"Kapstelle", "Nazwa", "Grupa", "Suma"};
+    private final Class<?>[] columnClasses = {Integer.class, String.class, String.class, Boolean.class};
 
     public GroupsTableModel(List<WorkplaceXMLRecord> workplaces) {
         this.workplaces = workplaces;
@@ -34,6 +34,8 @@ public class GroupsTableModel extends AbstractTableModel {
                 return workplace.getName();
             case 2:
                 return workplace.getGroupName();
+            case 3:
+                return workplace.isSumRelevant();
             default:
                 return null;
         }
@@ -53,10 +55,17 @@ public class GroupsTableModel extends AbstractTableModel {
             case 2:
                 workplace.setGroupName((String) aValue);
                 break;
+            case 3:
+                if (aValue instanceof Boolean) {
+                    workplace.setSumRelevant((Boolean) aValue);
+                } else {
+                    throw new IllegalArgumentException("Invalid value for sum relevance: " + aValue);
+                }
+                break;
             default:
                 break;
         }
-        ImportFunctions.updateWorkplaceInFile(ImportFunctions.WORKPLACE_FILE_PATH, oldId, workplace.getId(), workplace.getName(), workplace.getGroupName());
+        ImportFunctions.updateWorkplaceInFile(ImportFunctions.WORKPLACE_FILE_PATH, oldId, workplace.getId(), workplace.getName(), workplace.getGroupName(), workplace.isSumRelevant());
 
     }
     @Override
@@ -73,11 +82,11 @@ public class GroupsTableModel extends AbstractTableModel {
     }
 
 
-    public void addNewWorkplace(int workplaceId, String workplaceName, String GroupName){
-        WorkplaceXMLRecord newWorkplace = new WorkplaceXMLRecord(workplaceId, workplaceName, GroupName);
+    public void addNewWorkplace(int workplaceId, String workplaceName, String groupName, boolean sumRelevant) {
+        WorkplaceXMLRecord newWorkplace = new WorkplaceXMLRecord(workplaceId, workplaceName, groupName, sumRelevant);
         workplaces.add(newWorkplace);
         //this.addRow(new Object[]{workplaceId, workplaceName, GroupName});
-        ImportFunctions.addWorkplaceToFile(ImportFunctions.WORKPLACE_FILE_PATH, workplaceId, workplaceName, GroupName);
+        ImportFunctions.addWorkplaceToFile(ImportFunctions.WORKPLACE_FILE_PATH, workplaceId, workplaceName, groupName, sumRelevant);
     }
 
     public void removeWorkplace(int rowIndex) {
