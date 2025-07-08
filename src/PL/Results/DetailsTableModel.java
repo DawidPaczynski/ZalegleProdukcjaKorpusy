@@ -75,4 +75,8 @@ public class DetailsTableModel extends AbstractTableModel {
                 return null;
         }
     }
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return columnIndex == 0;
+    }
 }
