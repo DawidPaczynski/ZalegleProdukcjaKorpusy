@@ -78,10 +78,11 @@ public class ResultTableModel extends AbstractTableModel {
     private SortedSet<String> getAllBlocksFromWorkplaceGroups(List<WorkplaceGroup> workplaceGroups) {
         SortedSet<String> allBlocks = new TreeSet<>((o1, o2) -> {
             try {
-            if (o1.equals("Grupa")) return -1; // "Grupa" comes first
-            if (o2.equals("Grupa")) return 1;  // "Grupa" comes first
-            else if (o1.equals(o2)) return 0; // same block
-            else{
+                if (o1.equals(o2)) return 0; // same block
+                if (o1.equals("Grupa")) return -1; // "Grupa" comes first
+                if (o2.equals("Grupa")) return 1;
+            
+                else{
                     // set by Week first
                     String week1 = o1.split("/")[0].replaceAll("[^0-9]", "");
                     String week2 = o2.split("/")[0].replaceAll("[^0-9]", "");
@@ -89,9 +90,9 @@ public class ResultTableModel extends AbstractTableModel {
                         return Integer.compare(Integer.parseInt(week1), Integer.parseInt(week2));
                     } else {
                         // set by Express second
-                        if (o1.startsWith("E")) {
-                            return -1;
-                        } else {
+                       // if (o1.startsWith("E") && !o2.startsWith("E")) {
+                            //return -1;
+                       // } else {
                             // set by block third
                             String block1 = o1.split("/")[1].replaceAll("[^0-9]", "");
                             String block2 = o2.split("/")[1].replaceAll("[^0-9]", "");
@@ -105,13 +106,13 @@ public class ResultTableModel extends AbstractTableModel {
                                     return 1;
                                 }
                             }
-                        }
+                      //  }
                     }
                 }
-            }catch (ArrayIndexOutOfBoundsException ex){
+                }catch (ArrayIndexOutOfBoundsException ex){
                 // If the format is incorrect, we can just compare them as strings
-                return o1.compareTo(o2);
-            }
+                    return o1.compareTo(o2);
+                }
         });
 
         allBlocks.add("Grupa"); // Add "Grupa" explicitly
